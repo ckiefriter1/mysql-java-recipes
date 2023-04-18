@@ -55,7 +55,7 @@ CREATE TABLE step (
   step_order INT NOT NULL,
   step_text TEXT NOT null,
   PRIMARY KEY (step_id),
-  FOREIGN KEY (recipe_id) references recipe (recipe_id)
+  FOREIGN KEY (recipe_id) references recipe (recipe_id) on delete cascade
 );
 
 -- Create ingredient table.
@@ -68,9 +68,6 @@ CREATE TABLE ingredient (
   ingredient_order INT NOT NULL,
   amount DECIMAL(7, 2),
   primary key (ingredient_id),
-  foreign key (recipe_id) references recipe (recipe_id),
+  foreign key (recipe_id) references recipe (recipe_id) on delete cascade,
   foreign key (unit_id) references unit (unit_id) 
 );
-
-
-
