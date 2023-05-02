@@ -44,8 +44,7 @@ create table recipe_category (
   category_id INT NOT NULL,
   foreign key (recipe_id) REFERENCES recipe (recipe_id),
   foreign key(category_id) REFERENCES category (category_id),
-  unique key (recipe_id,
-category_id)
+  unique key (recipe_id, category_id)
 );
 
 -- Create step table.
