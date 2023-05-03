@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import recipes.dao.RecipeDao;
+import recipes.entity.Recipe;
 import recipes.exception.DbException;
 
 public class RecipeService {
@@ -21,6 +22,10 @@ public class RecipeService {
 	public RecipeService() {		
 	}
 	
+	public Recipe addRecipe(Recipe recipe) {
+		return recipeDao.insertRecipe(recipe);
+	}
+
 	public void createAndPopulateTables() {
 		loadFromFile(SCHEMA_FILE);
 		loadFromFile(DATA_FILE);
@@ -93,7 +98,10 @@ public class RecipeService {
 		return lines;
 	}
 
+	/*
 	public static void main (String[] args) {
 		new RecipeService().createAndPopulateTables();
 	}
+	*/
+
 }

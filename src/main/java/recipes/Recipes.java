@@ -1,12 +1,12 @@
 package recipes;
 
-import java.sql.Connection;
+//import java.sql.Connection;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import recipes.dao.DbConnection;
+//import recipes.dao.DbConnection;
 import recipes.entity.Recipe;
 import recipes.exception.DbException;
 import recipes.service.RecipeService;
@@ -72,6 +72,15 @@ public class Recipes {
 		LocalTime cookTime = minutesToLocalTime(cookMinutes);
 		
 		Recipe recipe = new Recipe();
+		
+		recipe.setRecipeName(name);
+		recipe.setNotes(notes);
+		recipe.setNumServings(numServings);
+		recipe.setPrepTime(prepTime);
+		recipe.setCookTime(cookTime);
+		
+		Recipe dbRecipe = recipeService.addRecipe(recipe);
+		System.out.println("You added this recipe:\n" + dbRecipe);
 	}
 
 	private LocalTime minutesToLocalTime(Integer numMinutes) {
