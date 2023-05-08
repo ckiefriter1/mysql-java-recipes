@@ -7,10 +7,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import recipes.dao.RecipeDao;
 import recipes.entity.Recipe;
 import recipes.exception.DbException;
+import recipes.exception.NotFoundException;
 
 public class RecipeService {
 	
@@ -32,6 +34,18 @@ public class RecipeService {
 		//System.out.println("Database tables created for Recipes database...");
 	}
 
+	public List<Recipe> findAllRecipes() {
+		return recipeDao.findAllRecipes();
+	}
+	
+	public Recipe findRecipeById(Integer recipeId) {
+		Optional<Recipe> opRecipe = recipeDao.findRecipeById(recipeId);
+		
+		return opRecipe.orElseThrow(
+			() -> new NotFoundException ("*** The Recipe ID you selected is not a valid recipe.\n")	
+				);
+	}
+	
 	private void loadFromFile(String fileName) {
 		String content = readFileContent(fileName);
 		List<String> sqlStatements = convertContentToSqlStatements(content);

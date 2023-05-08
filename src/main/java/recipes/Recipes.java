@@ -2,6 +2,7 @@ package recipes;
 
 //import java.sql.Connection;
 import java.time.LocalTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -19,7 +20,9 @@ public class Recipes {
 	// @formatter:off
 	private List<String> operations = List.of(
 			"1) Create and populate tables",
-			"2) Add a recipe"
+			"2) Add a recipe",
+			"3) Display all recipes",
+			"4) Display a specific recipe"
 			);
 	
 	// @formatter:on
@@ -50,6 +53,14 @@ public class Recipes {
 					addRecipe();
 					break;
 					
+				case 3:
+					displayAllRecipes();
+					break;
+					
+				case 4:
+					displaySpecificRecipe();
+					break;
+					
 				default:
 					System.out.println("\n" + operation + " is not valid. Try again");
 					break;
@@ -58,6 +69,43 @@ public class Recipes {
 				System.out.println("\nError: " + e.toString() + "\n Try again");
 			}
 		}
+		
+	}
+
+	private void displaySpecificRecipe() {
+		Integer recipeId = getIntInput("Enter a Recipe ID:");
+		Recipe recipe = recipeService.findRecipeById(recipeId);
+		
+		System.out.println("----------------------------------------------------");
+		System.out.println("************       Recipe Details      *************");
+		System.out.println("----------------------------------------------------");
+		
+		System.out.println("Recipe ID: " + recipe.getRecipeId());
+		System.out.println("Recipe Name: " + recipe.getRecipeName());
+		System.out.println("Notes: " + recipe.getNotes());
+		System.out.println("Number of Servings: " + recipe.getNumServings());
+		System.out.println("Prep Time: " + recipe.getPrepTime());
+		System.out.println("Cook Time: " + recipe.getCookTime());
+		System.out.println("Created at: " + recipe.getCreatedAt());
+	}
+
+	private void displayAllRecipes() {
+		
+		System.out.println("----------------------------------------------------");
+		System.out.println("************       Recipe List       ***************");
+		System.out.println("----------------------------------------------------");
+		
+		List<Recipe> recipeList = recipeService.findAllRecipes();
+		Iterator<Recipe> listIterator = recipeList.iterator();
+		while (listIterator.hasNext()) {
+			Recipe recipe = listIterator.next();
+			System.out.println("Recipe ID: " + recipe.getRecipeId() + ", Recipe Name: " + recipe.getRecipeName());
+		}
+		
+		System.out.println("----------------------------------------------------");
+		System.out.println("Total # of Recipes: " + recipeList.size());
+		System.out.println("----------------------------------------------------");
+				
 		
 	}
 
