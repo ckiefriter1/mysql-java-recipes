@@ -21,7 +21,7 @@ public class Recipes {
 	private List<String> operations = List.of(
 			"1) Create and populate tables",
 			"2) Add a recipe",
-			"3) Display all recipes",
+			"3) List recipes",
 			"4) Display a specific recipe"
 			);
 	

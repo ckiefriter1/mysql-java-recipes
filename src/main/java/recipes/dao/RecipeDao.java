@@ -114,7 +114,7 @@ public class RecipeDao extends DaoBase {
 
 	public List<Recipe> findAllRecipes() {
 		// @formatter:off
-		String sql = "SELECT * FROM recipe";
+		String sql = "SELECT * FROM recipe ORDER by recipe_name";
 		// @formatter:on
 
 		try(Connection conn = DbConnection.getConnection()) {
