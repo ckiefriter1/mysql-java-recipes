@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+import recipes.entity.Category;
+import recipes.entity.Ingredient;
 //import recipes.dao.DbConnection;
 import recipes.entity.Recipe;
+import recipes.entity.Step;
 import recipes.exception.DbException;
 import recipes.service.RecipeService;
 
@@ -16,13 +19,14 @@ public class Recipes {
 
 	private Scanner scanner = new Scanner(System.in);
 	private RecipeService recipeService = new RecipeService();
+	private Recipe curRecipe = null;
 
 	// @formatter:off
 	private List<String> operations = List.of(
 			"1) Create and populate tables",
 			"2) Add a recipe",
 			"3) List recipes",
-			"4) Display a specific recipe"
+			"4) Select working recipe"
 			);
 	
 	// @formatter:on
@@ -58,6 +62,7 @@ public class Recipes {
 					break;
 					
 				case 4:
+					displayAllRecipes();
 					displaySpecificRecipe();
 					break;
 					
@@ -72,9 +77,15 @@ public class Recipes {
 		
 	}
 
+	private void setCurrentRecipe(Recipe recipe) {
+		this.curRecipe = recipe;
+		
+	}
+
 	private void displaySpecificRecipe() {
 		Integer recipeId = getIntInput("Enter a Recipe ID:");
 		Recipe recipe = recipeService.findRecipeById(recipeId);
+		this.setCurrentRecipe(recipe);
 		
 		System.out.println("----------------------------------------------------");
 		System.out.println("************       Recipe Details      *************");
@@ -87,6 +98,31 @@ public class Recipes {
 		System.out.println("Prep Time: " + recipe.getPrepTime());
 		System.out.println("Cook Time: " + recipe.getCookTime());
 		System.out.println("Created at: " + recipe.getCreatedAt());
+		
+		System.out.println("Ingredients:");
+		List<Ingredient> ingredients = recipe.getIngredients();
+		Iterator<Ingredient> iListIterator = ingredients.iterator();
+		while (iListIterator.hasNext()) {
+			Ingredient ingredient = iListIterator.next();
+			System.out.println("   ID: " + ingredient.getIngredientId() + ", " + ingredient.getIngredientName());
+		}
+		
+		System.out.println("Steps:");
+		List<Step> steps = recipe.getSteps();
+		Iterator<Step> sListIterator = steps.iterator();
+		while (sListIterator.hasNext()) {
+			Step step = sListIterator.next();
+			System.out.println("   ID: " + step.getStepId() + ", " + step.getStepText());
+		}
+		
+		System.out.println("Categories:");
+		List<Category> categories = recipe.getCategories();
+		Iterator<Category> cListIterator = categories.iterator();
+		while (cListIterator.hasNext()) {
+			Category category = cListIterator.next();
+			System.out.println("   ID: " + category.getCategoryId() + ", " + category.getCategoryName());
+		}
+		
 	}
 
 	private void displayAllRecipes() {
@@ -129,6 +165,7 @@ public class Recipes {
 		
 		Recipe dbRecipe = recipeService.addRecipe(recipe);
 		System.out.println("You added this recipe:\n" + dbRecipe);
+		this.curRecipe = recipeService.findRecipeById(dbRecipe.getRecipeId());
 	}
 
 	private LocalTime minutesToLocalTime(Integer numMinutes) {
