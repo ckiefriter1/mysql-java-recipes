@@ -210,7 +210,7 @@ public class RecipeDao extends DaoBase {
 
 	private List<Ingredient> fetchRecipeIngredients(Connection conn, Integer recipeId) throws SQLException {
 		// @formatter:off
-		String sql = "SELECT i.*, u.unit_name-singular, u.unit_name-plural " 
+		String sql = "SELECT i.*, u.unit_name_singular, u.unit_name_plural " 
 		           + "  FROM " + INGREDIENT_TABLE + " i " 
 				   + "LEFT JOIN " + UNIT_TABLE + " u USING (unit_id) "
 				   + "WHERE recipe_id = ? "

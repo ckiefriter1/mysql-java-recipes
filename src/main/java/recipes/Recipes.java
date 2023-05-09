@@ -87,7 +87,7 @@ public class Recipes {
 		Recipe recipe = recipeService.findRecipeById(recipeId);
 		this.setCurrentRecipe(recipe);
 		
-		System.out.println("----------------------------------------------------");
+		System.out.println("\n----------------------------------------------------");
 		System.out.println("************       Recipe Details      *************");
 		System.out.println("----------------------------------------------------");
 		
@@ -105,6 +105,7 @@ public class Recipes {
 		while (iListIterator.hasNext()) {
 			Ingredient ingredient = iListIterator.next();
 			System.out.println("   ID: " + ingredient.getIngredientId() + ", " + ingredient.getIngredientName());
+			//System.out.println(ingredient.toString());
 		}
 		
 		System.out.println("Steps:");
@@ -113,6 +114,7 @@ public class Recipes {
 		while (sListIterator.hasNext()) {
 			Step step = sListIterator.next();
 			System.out.println("   ID: " + step.getStepId() + ", " + step.getStepText());
+			//System.out.println(step.toString());
 		}
 		
 		System.out.println("Categories:");
@@ -121,13 +123,14 @@ public class Recipes {
 		while (cListIterator.hasNext()) {
 			Category category = cListIterator.next();
 			System.out.println("   ID: " + category.getCategoryId() + ", " + category.getCategoryName());
+			//System.out.println(category.toString());
 		}
 		
 	}
 
 	private void displayAllRecipes() {
 		
-		System.out.println("----------------------------------------------------");
+		System.out.println("\n----------------------------------------------------");
 		System.out.println("************       Recipe List       ***************");
 		System.out.println("----------------------------------------------------");
 		
