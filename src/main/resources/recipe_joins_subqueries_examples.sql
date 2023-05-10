@@ -11,7 +11,7 @@ SELECT u.unit_id AS uid,
        i.ingredient_name AS ingredient
 FROM ingredient i
 INNER JOIN unit u USING (unit_id)
-WHERE recipe_id = 1;
+WHERE i.recipe_id = 1;
 
 -- Inner join form #2
 SELECT u.unit_id AS uid, 
