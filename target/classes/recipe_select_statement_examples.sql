@@ -1,6 +1,6 @@
 select * from recipe;
 
-select * from recipe where recipe_id = 6;
+select * from recipe where recipe_id = 1;
 
 SELECT recipe_id, recipe_name
 FROM recipe
@@ -87,5 +87,7 @@ HAVING count(*) = 1;
 SELECT count(*) AS 'Num Recipes', prep_time
 FROM recipe
 HAVING count(*) > 0;
+
+
 
 

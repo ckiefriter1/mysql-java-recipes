@@ -73,11 +73,15 @@ SELECT u.unit_id AS uid,
 CROSS JOIN unit u
 WHERE recipe_id = 1;
 
-SELECT r.recipe_name 
+SELECT * 
   FROM recipe_category rc   
 INNER JOIN recipe r USING (recipe_id)  
  WHERE category_id = ( 
 					 SELECT category_id 
     				 FROM category
     				 WHERE category_name = 'Side Dish');
+    				
+    				SELECT category_id 
+    				 FROM category
+    				 WHERE category_name = 'Side Dish';
 
