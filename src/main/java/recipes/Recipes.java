@@ -35,6 +35,7 @@ public class Recipes {
 		new Recipes().displayMenu();
 
 	}
+	
 
 	private void displayMenu() {
 		boolean done = false;
