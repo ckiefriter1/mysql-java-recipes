@@ -172,6 +172,17 @@ FROM ingredient i
 CROSS JOIN unit u
 WHERE recipe_id = 1;
 
+-- AVG example
+SELECT AVG(i.amount) AS Average
+FROM ingredient i;
+
+-- CONCAT example
+SELECT DISTINCT CONCAT(i.amount, ' ', 
+  u.unit_name_plural) AS Amount
+FROM ingredient i
+INNER JOIN unit u USING(unit_id)
+WHERE u.unit_name_plural LIKE 'ou%';
+
 -- --------------------------------------------------------
 select * from recipe where recipe_id = 7;
 select * from ingredient where recipe_id = 7;

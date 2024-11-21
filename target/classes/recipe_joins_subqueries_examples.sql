@@ -35,6 +35,10 @@ FROM ingredient i, unit u
 WHERE u.unit_id = i.unit_id
 AND recipe_id = 1;
 
+select * 
+  from ingredient i 
+ where recipe_id = 1; 
+
 -- Left outer join
 SELECT u.unit_id AS uid, 
        i.ingredient_id AS iid, 
@@ -59,8 +63,8 @@ SELECT u.unit_id AS uid,
        i.amount AS amount,
        i.ingredient_name AS ingredient
   FROM ingredient i
-RIGHT JOIN unit u USING (unit_id)
-WHERE recipe_id = 1;
+RIGHT JOIN unit u USING (unit_id);
+-- WHERE recipe_id = 1;
 
 -- Cross join - someting you can do in MySQL, usually a bad thing to do.
 SELECT u.unit_id AS uid, 
@@ -73,11 +77,15 @@ SELECT u.unit_id AS uid,
 CROSS JOIN unit u
 WHERE recipe_id = 1;
 
-SELECT r.recipe_name 
+SELECT * 
   FROM recipe_category rc   
 INNER JOIN recipe r USING (recipe_id)  
  WHERE category_id = ( 
 					 SELECT category_id 
     				 FROM category
     				 WHERE category_name = 'Side Dish');
+    				
+    				SELECT category_id 
+    				 FROM category
+    				 WHERE category_name = 'Side Dish';
 

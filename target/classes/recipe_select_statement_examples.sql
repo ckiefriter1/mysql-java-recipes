@@ -1,10 +1,16 @@
 select * from recipe;
 
+select count(*) from recipe;
+
+select * from step where step_id = 31;
+
 select * from recipe where recipe_id = 1;
 
 SELECT recipe_id, recipe_name
 FROM recipe
 WHERE recipe_id = 1;
+
+select * from ingredient;
 
 SELECT *
 FROM category
