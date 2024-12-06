@@ -1,137 +1,146 @@
+// Copyright (c) 2022 Promineo Tech
+
 package recipes.entity;
 
 import java.time.LocalDateTime;
-
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class hold data for an entire recipe. A recipe table row data is stored
+ * in the instance variables. There are also lists that contain ingredients,
+ * steps, and categories. This contains getters for all fields, but not setters
+ * for the lists. The lists can be accessed through the getters, like this:
+ * <pre>
+ * recipe.getIngredients().add(ingredient);
+ * </pre>
+ * 
+ * @author Promineo
+ *
+ */
 public class Recipe {
-	private Integer recipeId;
-	private String recipeName;
-	private String notes;
-	private Integer numServings;
-	private LocalTime prepTime;
-	private LocalTime cookTime;
-	private LocalDateTime createdAt;
+  private Integer recipeId;
+  private String recipeName;
+  private String notes;
+  private Integer numServings;
+  private LocalTime prepTime;
+  private LocalTime cookTime;
+  private LocalDateTime createdAt;
 
-	private List<Ingredient> ingredients = new LinkedList<>();
-	private List<Step> steps = new LinkedList<>();
-	private List<Category> categories = new LinkedList<>();
+  private List<Ingredient> ingredients = new LinkedList<>();
+  private List<Step> steps = new LinkedList<>();
+  private List<Category> categories = new LinkedList<>();
 
-	public Integer getRecipeId() {
-		return recipeId;
-	}
+  /**
+   * This method prints the recipe instance variables. Then it prints all the
+   * instructions, steps and categories.
+   */
+  @Override
+  public String toString() {
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+    String createTime =
+        Objects.nonNull(createdAt) ? fmt.format(createdAt) : "(null)";
 
-	public void setRecipeId(Integer recipeId) {
-		this.recipeId = recipeId;
-	}
+    String recipe = "";
 
-	public String getRecipeName() {
-		return recipeName;
-	}
+    recipe += "\n   ID=" + recipeId;
+    recipe += "\n   recipeName=" + recipeName;
+    recipe += "\n   notes=" + notes;
+    recipe += "\n   numServings=" + numServings;
+    recipe += "\n   prepTime=" + prepTime;
+    recipe += "\n   cookTime=" + cookTime;
+    recipe += "\n   createdAt=" + createTime;
 
-	public void setRecipeName(String recipeName) {
-		this.recipeName = recipeName;
-	}
+    recipe += "\n   Ingredients:";
 
-	public String getNotes() {
-		return notes;
-	}
+    for (Ingredient ingredient : ingredients) {
+      recipe += "\n      " + ingredient;
+    }
 
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+    recipe += "\n   Steps:";
 
-	public Integer getNumServings() {
-		return numServings;
-	}
+    for (Step step : steps) {
+      recipe += "\n      " + step;
+    }
 
-	public void setNumServings(Integer numServings) {
-		this.numServings = numServings;
-	}
+    recipe += "\n   Categories:";
 
-	public LocalTime getPrepTime() {
-		return prepTime;
-	}
+    for (Category category : categories) {
+      recipe += "\n      " + category;
+    }
 
-	public void setPrepTime(LocalTime prepTime) {
-		this.prepTime = prepTime;
-	}
+    return recipe;
+  }
 
-	public LocalTime getCookTime() {
-		return cookTime;
-	}
+  public Integer getRecipeId() {
+    return recipeId;
+  }
 
-	public void setCookTime(LocalTime cookTime) {
-		this.cookTime = cookTime;
-	}
+  public void setRecipeId(Integer recipeId) {
+    this.recipeId = recipeId;
+  }
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
+  public String getRecipeName() {
+    return recipeName;
+  }
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+  public void setRecipeName(String recipeName) {
+    this.recipeName = recipeName;
+  }
 
-	public List<Ingredient> getIngredients() {
-		return ingredients;
-	}
+  public String getNotes() {
+    return notes;
+  }
 
-	public void setIngredients(List<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
 
-	public List<Step> getSteps() {
-		return steps;
-	}
+  public Integer getNumServings() {
+    return numServings;
+  }
 
-	public void setSteps(List<Step> steps) {
-		this.steps = steps;
-	}
+  public void setNumServings(Integer numServings) {
+    this.numServings = numServings;
+  }
 
-	public List<Category> getCategories() {
-		return categories;
-	}
+  public LocalTime getPrepTime() {
+    return prepTime;
+  }
 
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
-	}
+  public void setPrepTime(LocalTime prepTime) {
+    this.prepTime = prepTime;
+  }
 
-	@Override
-	public String toString() {
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
-		String createTime = Objects.nonNull(createdAt) ? fmt.format(createdAt) : "(null)";
-		
-		String recipe = "";
-		
-		recipe += "\n   ID=" + recipeId;
-		recipe += "\n   recipeName=" + recipeName;
-		recipe += "\n   notes=" + notes;
-		recipe += "\n   numServings=" + numServings;
-		recipe += "\n   prepTime=" + prepTime;
-		recipe += "\n   cookTime=" + cookTime;
-		recipe += "\n   createdAt" + createTime;
-		
-		recipe += "\n   Ingredients:";
-		for (Ingredient ingredient : ingredients) {
-			recipe += "\n      " + ingredient;
-		}
-		
-		recipe += "\n   Steps:";
-		for (Step step : steps) {
-			recipe += "\n      " + step;
-		}
-		
-		recipe += "\n   Categories:";
-		for (Category category : categories) {
-			recipe += "\n      " + category;
-		}
-		return recipe;
-		
-	}
-	
+  public LocalTime getCookTime() {
+    return cookTime;
+  }
+
+  public void setCookTime(LocalTime cookTime) {
+    this.cookTime = cookTime;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public List<Ingredient> getIngredients() {
+    return ingredients;
+  }
+
+  public List<Step> getSteps() {
+    return steps;
+  }
+
+  public List<Category> getCategories() {
+    return categories;
+  }
+
 }

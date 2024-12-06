@@ -39,7 +39,7 @@ CREATE TABLE unit (
 );
 
 -- Join table for recipe and category tables.
-create table recipe_category (
+CREATE TABLE recipe_category (
   recipe_id INT NOT NULL,
   category_id INT NOT NULL,
   foreign key (recipe_id) REFERENCES recipe (recipe_id),

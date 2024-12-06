@@ -9,7 +9,7 @@ public class DbConnectionTest {
 		
 		try (Connection conn = DbConnection.getConnection()) {
 			System.out.println("*** Database Connection established");
-			System.out.println(conn.getClientInfo());
+			System.out.println("Current Schema: " + conn.getCatalog());
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
